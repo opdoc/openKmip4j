@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>hu.opdoc.openkmip4j</groupId>
+    <artifactId>openkmip4j</artifactId>
+    <name>openkmip4j</name>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<modules>
+        <module>openkmip4j-core</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <configuration>
+                        <quiet>true</quiet>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <!--dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>hu.microsec.cegbir</groupId>
+                <artifactId>microsec-cegbir-api</artifactId>
+                <version>${microsec-cegbir-api.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement-->
+</project>
