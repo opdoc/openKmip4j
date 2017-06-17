@@ -4,6 +4,7 @@ package hu.opdoc.openkmip4j;
  * Created by peter on 2017.05.24..
  */
 public class KmipRuntimeException extends RuntimeException {
+
     public KmipRuntimeException() {
     }
 

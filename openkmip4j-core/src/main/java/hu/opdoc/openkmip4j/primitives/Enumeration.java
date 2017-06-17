@@ -10,14 +10,14 @@ public class Enumeration extends Primitive {
     private final String stringValue;
     private final java.lang.Integer numericValue;
 
-    public Enumeration(final TagValue tag, final String stringValue) {
+    public Enumeration(final Tag tag, final String stringValue) {
         super(tag, Type.Enumeration);
         this.stringValue = stringValue;
         this.numericValue = null;
         vaildate();
     }
 
-    public Enumeration(final TagValue tag, final java.lang.Integer numericValue) {
+    public Enumeration(final Tag tag, final java.lang.Integer numericValue) {
         super(tag, Type.Enumeration);
         this.stringValue = null;
         this.numericValue = numericValue;

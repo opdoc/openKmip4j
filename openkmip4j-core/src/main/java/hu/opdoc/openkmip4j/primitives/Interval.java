@@ -12,7 +12,7 @@ public class Interval extends Primitive {
     private static final Long MAX_VALUE = Math.round(Math.pow(2, 32));
     private final Duration value;
 
-    public Interval(final TagValue tag, final Duration value) {
+    public Interval(final Tag tag, final Duration value) {
         super(tag, Type.Interval);
         this.value = value == null ? Duration.ZERO : value;
         validate();

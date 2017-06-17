@@ -7,7 +7,7 @@ public class LongInteger extends Primitive {
 
     private final Long value;
 
-    public LongInteger(final TagValue tag, final Long value) {
+    public LongInteger(final Tag tag, final Long value) {
         super(tag, Type.LongInteger);
         this.value = value;
     }

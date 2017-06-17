@@ -9,7 +9,7 @@ public class DateTime extends Primitive {
 
     private final LocalDateTime value;
 
-    public DateTime(final TagValue tag, final LocalDateTime value) {
+    public DateTime(final Tag tag, final LocalDateTime value) {
         super(tag, Type.DateTime);
         this.value = value == null ? LocalDateTime.MIN : value;
     }

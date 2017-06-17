@@ -5,24 +5,24 @@ package hu.opdoc.openkmip4j.primitives;
  */
 public abstract class Primitive {
 
-    public final TagValue tag;
+    public final Tag tag;
     public final Type type;
     public final Long length;
 
-    public Primitive(final TagValue tag, final Type type, final Long length) {
+    public Primitive(final Tag tag, final Type type, final Long length) {
         this.tag = tag;
         this.type = type;
         this.length = length;
     }
 
-    public Primitive(final TagValue tag, final Type type) {
+    public Primitive(final Tag tag, final Type type) {
         this(tag, type, type.getLength());
         if (length == null) {
             throw new IllegalArgumentException(String.format("Data length must be explicitly defined for data type %s.", type.name()));
         }
     }
 
-    public TagValue getTag() {
+    public Tag getTag() {
         return tag;
     }
 

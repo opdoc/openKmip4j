@@ -7,7 +7,7 @@ public class Boolean extends Primitive {
 
     private final boolean value;
 
-    public Boolean(final TagValue tag, final boolean value) {
+    public Boolean(final Tag tag, final boolean value) {
         super(tag, Type.Boolean);
         this.value = value;
     }

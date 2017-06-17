@@ -7,7 +7,7 @@ public class BigInteger extends Primitive {
 
     private final java.math.BigInteger value;
 
-    public BigInteger(final TagValue tag, final java.math.BigInteger value) {
+    public BigInteger(final Tag tag, final java.math.BigInteger value) {
         super(tag, Type.BigInteger, value == null ? 0l : ceilDivMinOne(value.bitCount(), 64) * 8);
         this.value = value == null ? java.math.BigInteger.ZERO : value;
     }

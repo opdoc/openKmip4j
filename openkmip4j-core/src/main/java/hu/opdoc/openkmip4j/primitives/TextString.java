@@ -9,7 +9,7 @@ public class TextString extends Primitive {
 
     private final String value;
 
-    public TextString(final TagValue tag, final String value) {
+    public TextString(final Tag tag, final String value) {
         super(tag, Type.TextString, value == null ? 0 : Long.valueOf(value.getBytes(StandardCharsets.UTF_8).length));
         this.value = value == null ? "" : value;
     }

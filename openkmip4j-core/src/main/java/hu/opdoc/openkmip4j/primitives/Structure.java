@@ -11,7 +11,7 @@ public class Structure extends Primitive {
 
     private final List<Primitive> value;
 
-    public Structure(final TagValue tag, final List<Primitive> value) {
+    public Structure(final Tag tag, final List<Primitive> value) {
         super(
                 tag,
                 Type.Structure,

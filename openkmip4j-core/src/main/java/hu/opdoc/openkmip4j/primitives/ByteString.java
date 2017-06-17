@@ -7,7 +7,7 @@ public class ByteString extends Primitive {
 
     private final byte[] value;
 
-    public ByteString(final TagValue tag, final byte[] value) {
+    public ByteString(final Tag tag, final byte[] value) {
         super(tag, Type.ByteString, value == null ? 0 : Long.valueOf(value.length));
         this.value = value == null ? new byte[0] : value;
     }

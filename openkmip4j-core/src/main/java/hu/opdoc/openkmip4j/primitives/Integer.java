@@ -14,20 +14,20 @@ public class Integer extends Primitive {
     private java.lang.Integer value = 0;
     private final List<String> maskConstants;
 
-    public Integer(final TagValue tag, final java.lang.Integer value) {
+    public Integer(final Tag tag, final java.lang.Integer value) {
         super(tag, Type.Integer);
         this.value = value == null ? 0 : value;
         this.maskConstants = Collections.emptyList();
     }
 
-    public Integer(final TagValue tag, final String constant) {
+    public Integer(final Tag tag, final String constant) {
         super(tag, Type.Integer);
         this.maskConstants = new ArrayList<>(1);
         this.maskConstants.add(constant);
         processNumericMasks();
     }
 
-    public Integer(final TagValue tag, final Collection<String> constants) {
+    public Integer(final Tag tag, final Collection<String> constants) {
         super(tag, Type.Integer);
         this.maskConstants = new ArrayList<>(constants);
         processNumericMasks();
