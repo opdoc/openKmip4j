@@ -5,12 +5,12 @@ import hu.opdoc.openkmip4j.primitives.Primitive;
 import hu.opdoc.openkmip4j.primitives.StandardTag;
 import hu.opdoc.openkmip4j.primitives.Tag;
 import hu.opdoc.openkmip4j.primitives.Type;
+import hu.opdoc.openkmip4j.representation.ttlv.TtlvHeader;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -99,19 +99,17 @@ public class ParsedMessage {
     }
 
     private static boolean isTTLV(final byte[] buffer) {
-        final Integer tagValue = 0x10000 * buffer[0] + 0x100 * buffer[1] + buffer[2];
-        final byte typeValue = buffer[3];
-
         try {
+            final TtlvHeader header = new TtlvHeader(buffer);
+
             // The type must be identifiable, and should be a Structure as any Message is a Structure.
-            final Type type = Type.fromValue(typeValue);
-            if (Type.Structure != type) {
+            if (Type.Structure != header.getType()) {
                 // TODO: logger.trace("Not a Structure type (<type>), not a TTLV.")
                 return false;
             }
 
             // The Tag must be identifiable and should be RequestMessage or ResponseMessage.
-            final Tag tag = Tag.valueOf(tagValue);
+            final Tag tag = header.getTag();
             if (StandardTag.RequestMessage != tag && StandardTag.ResponseMessage != tag) {
                 // TODO: logger.trace("Not a Request- or ResponseMessage (<tag>), not TTLV.")
                 return false;

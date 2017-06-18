@@ -18,8 +18,18 @@ public class Interval extends Primitive {
         validate();
     }
 
+    public Interval(final Tag tag, final Long value) {
+        super(tag, Type.Interval);
+        this.value = value == null ? Duration.ZERO : Duration.of(value, ChronoUnit.MILLIS);
+        validate();
+    }
+
     public Duration getValue() {
         return value;
+    }
+
+    public Long getNumericValue() {
+        return value.get(ChronoUnit.MILLIS);
     }
 
     private void validate() {

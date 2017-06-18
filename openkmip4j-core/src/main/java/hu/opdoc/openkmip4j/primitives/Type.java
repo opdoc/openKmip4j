@@ -48,11 +48,11 @@ public enum Type {
         }
     }
 
-    public static Type fromValue(byte value) {
-        return fromValue(Byte.valueOf(value));
+    public static Type valueOf(byte value) {
+        return valueOf(Byte.valueOf(value));
     }
 
-    public static Type fromValue(Byte value) {
+    public static Type valueOf(Byte value) {
         final Type result = valueMap.get(value);
         if (result == null) {
             throw new IllegalArgumentException(String.format("Not a valid Type constant value: %d", value));
