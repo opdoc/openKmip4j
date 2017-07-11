@@ -1,18 +1,21 @@
 package hu.opdoc.openkmip4j.primitives;
 
+import hu.opdoc.openkmip4j.utils.EncryptedByteArray;
+import hu.opdoc.openkmip4j.utils.GuardedByteArray;
+
 /**
  * Created by peter on 2017.06.11..
  */
 public class ByteString extends Primitive {
 
-    private final byte[] value;
+    private final EncryptedByteArray encryptedValue;
 
-    public ByteString(final Tag tag, final byte[] value) {
-        super(tag, Type.ByteString, value == null ? 0 : Long.valueOf(value.length));
-        this.value = value == null ? new byte[0] : value;
+    public ByteString(final Tag tag, final GuardedByteArray guard) {
+        super(tag, Type.ByteString, (guard == null) ? 0 : Long.valueOf(guard.getValue().length));
+        this.encryptedValue = new EncryptedByteArray(guard);
     }
 
-    public byte[] getValue() {
-        return value;
+    public GuardedByteArray getValue() {
+        return encryptedValue.getValue();
     }
 }

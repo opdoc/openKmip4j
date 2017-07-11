@@ -5,9 +5,9 @@ package hu.opdoc.openkmip4j.primitives;
  */
 public abstract class Primitive {
 
-    public final Tag tag;
-    public final Type type;
-    public final Long length;
+    protected final Tag tag;
+    protected final Type type;
+    protected Long length;
 
     public Primitive(final Tag tag, final Type type, final Long length) {
         this.tag = tag;
