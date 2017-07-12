@@ -1,7 +1,6 @@
 package hu.opdoc.openkmip4j.utils;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.Arrays;
 
@@ -40,7 +39,7 @@ public class GuardedCharArray implements Closeable {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         destroy();
     }
 
