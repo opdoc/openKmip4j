@@ -19,11 +19,11 @@ public class TextString extends Primitive {
         if (value == null || value.getValue().length == 0) {
             this.encryptedValue = new EncryptedByteArray();
         } else {
-            final GuardedByteArray valueBytes = new GuardedByteArray(StandardCharsets.UTF_8.encode(value.getCharBuffer()));
-            value.getClass();    // Ensure the guard (and the protected value) won't be destroyed before.
-            this.length = Long.valueOf(valueBytes.getValue().length);
-            this.encryptedValue = new EncryptedByteArray(valueBytes);
-            valueBytes.destroy();
+            try (final GuardedByteArray valueBytes = new GuardedByteArray(StandardCharsets.UTF_8.encode(value.getCharBuffer()))) {
+                value.getClass();    // Ensure the guard (and the protected value) won't be destroyed before.
+                this.length = Long.valueOf(valueBytes.getValue().length);
+                this.encryptedValue = new EncryptedByteArray(valueBytes);
+            }
         }
     }
 
@@ -32,9 +32,9 @@ public class TextString extends Primitive {
     }
 
     public GuardedCharArray getValue() {
-        final GuardedByteArray decryptedBytes = getEncoded();
-        final GuardedCharArray result = new GuardedCharArray(StandardCharsets.UTF_8.decode(decryptedBytes.getByteBuffer()));
-        decryptedBytes.destroy();
-        return result;
+        try (final GuardedByteArray decryptedBytes = getEncoded()) {
+            final GuardedCharArray result = new GuardedCharArray(StandardCharsets.UTF_8.decode(decryptedBytes.getByteBuffer()));
+            return result;
+        }
     }
 }
