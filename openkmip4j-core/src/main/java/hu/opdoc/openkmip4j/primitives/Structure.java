@@ -28,11 +28,34 @@ public class Structure extends Primitive {
         return Collections.unmodifiableList(value);
     }
 
+    public static StructureBuilder newInstance(final Tag tag) {
+        return new StructureBuilder(tag);
+    }
+
     private static long multipleOfEight(final long originalLength) {
         long result = Math.floorDiv(originalLength, 8);
         if (result * 8 < originalLength) {
             result++;
         }
         return result;
+    }
+
+    public static class StructureBuilder {
+
+        private final Tag tag;
+        private final List<Primitive> contents = new ArrayList<>();
+
+        private StructureBuilder(Tag tag) {
+            this.tag = tag;
+        }
+
+        public StructureBuilder add(final Primitive item) {
+            contents.add(item);
+            return this;
+        }
+
+        public Structure build() {
+            return new Structure(tag, contents);
+        }
     }
 }

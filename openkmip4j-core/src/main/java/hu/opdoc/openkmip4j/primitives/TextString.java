@@ -27,6 +27,11 @@ public class TextString extends Primitive {
         }
     }
 
+    public TextString(final Tag tag, final GuardedByteArray encoded) {
+        super(tag, Type.TextString, Long.valueOf(encoded.getValue().length));
+        this.encryptedValue = new EncryptedByteArray(encoded);
+    }
+
     public GuardedByteArray getEncoded() {
         return encryptedValue.getValue();
     }

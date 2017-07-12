@@ -2,6 +2,7 @@ package hu.opdoc.openkmip4j.utils;
 
 import java.io.Closeable;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.Arrays;
 
 /**
@@ -31,7 +32,7 @@ public class GuardedByteArray implements Closeable {
     }
 
     public ByteBuffer getByteBuffer() {
-        return ByteBuffer.wrap(value);
+        return ByteBuffer.wrap(value).order(ByteOrder.BIG_ENDIAN);
     }
 
     public void destroy() {

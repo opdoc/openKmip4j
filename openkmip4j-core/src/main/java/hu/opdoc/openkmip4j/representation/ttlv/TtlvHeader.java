@@ -3,6 +3,9 @@ package hu.opdoc.openkmip4j.representation.ttlv;
 import hu.opdoc.openkmip4j.primitives.Tag;
 import hu.opdoc.openkmip4j.primitives.Type;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * Created by peter on 2017.06.18..
  */
@@ -18,6 +21,10 @@ public class TtlvHeader {
         this.tag = tag;
         this.type = type;
         this.length = length;
+    }
+
+    public TtlvHeader(final InputStream input) throws IOException {
+        this(readBuffer(input));
     }
 
     public TtlvHeader(byte[] bytes) {
@@ -82,5 +89,21 @@ public class TtlvHeader {
         buffer[offset + 7] = (byte) (lengthValue & 0xFF);
 
         return HEADER_LENGTH;
+    }
+
+    private static byte[] readBuffer(final InputStream input) throws IOException {
+        final byte[] buffer = new byte[Long.valueOf(HEADER_LENGTH).intValue()];
+        final int bytesRead = input.read(buffer);
+        if (bytesRead < HEADER_LENGTH) {
+            throw new IOException(
+                    String.format(
+                            "Cannot read a whole header (%d bytes)%s.",
+                            HEADER_LENGTH,
+                            bytesRead <= 0 ? ". No data" : String.format(" only %d byte(s) available", bytesRead)
+                    )
+            );
+        }
+
+        return buffer;
     }
 }
