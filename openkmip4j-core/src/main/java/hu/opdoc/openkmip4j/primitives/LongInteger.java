@@ -5,6 +5,8 @@ package hu.opdoc.openkmip4j.primitives;
  */
 public class LongInteger extends Primitive {
 
+    public static final Type TYPE = Type.LongInteger;
+
     private final Long value;
 
     public LongInteger(final Tag tag, final Long value) {

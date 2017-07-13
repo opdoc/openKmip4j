@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
  */
 public class Integer extends Primitive {
 
+    public static final Type TYPE = Type.Integer;
+
     private static final Pattern ONLY_NUMERIC_PATTERN = Pattern.compile("^\\d+$");
     private static final String HEX_VALUE_PREFIX = "0x";
 

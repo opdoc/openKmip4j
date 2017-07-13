@@ -8,6 +8,8 @@ import java.time.temporal.ChronoUnit;
  */
 public class Interval extends Primitive {
 
+    public static final Type TYPE = Type.Interval;
+
     private static final Long MIN_VALUE = 0l;
     private static final Long MAX_VALUE = Math.round(Math.pow(2, 32));
     private final Duration value;

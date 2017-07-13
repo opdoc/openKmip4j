@@ -10,6 +10,8 @@ import java.util.Arrays;
  */
 public class BigInteger extends Primitive {
 
+    public static final Type TYPE = Type.BigInteger;
+
     private final EncryptedByteArray encryptedValue;
 
     public BigInteger(final Tag tag, final java.math.BigInteger value) {

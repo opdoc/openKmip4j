@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class Structure extends Primitive {
 
+    public static final Type TYPE = Type.Structure;
+
     private final List<Primitive> value;
 
     public Structure(final Tag tag, final List<Primitive> value) {

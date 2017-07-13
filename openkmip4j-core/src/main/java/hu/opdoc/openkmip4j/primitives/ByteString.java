@@ -8,6 +8,8 @@ import hu.opdoc.openkmip4j.utils.GuardedByteArray;
  */
 public class ByteString extends Primitive {
 
+    public static final Type TYPE = Type.ByteString;
+
     private final EncryptedByteArray encryptedValue;
 
     public ByteString(final Tag tag, final GuardedByteArray guard) {

@@ -11,6 +11,8 @@ import java.nio.charset.StandardCharsets;
  */
 public class TextString extends Primitive {
 
+    public static final Type TYPE = Type.TextString;
+
     private final EncryptedByteArray encryptedValue;
 
     public TextString(final Tag tag, final GuardedCharArray value) {

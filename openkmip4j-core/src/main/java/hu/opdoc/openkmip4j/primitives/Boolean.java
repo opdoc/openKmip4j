@@ -5,6 +5,8 @@ package hu.opdoc.openkmip4j.primitives;
  */
 public class Boolean extends Primitive {
 
+    public static final Type TYPE = Type.Boolean;
+
     private final boolean value;
 
     public Boolean(final Tag tag, final boolean value) {

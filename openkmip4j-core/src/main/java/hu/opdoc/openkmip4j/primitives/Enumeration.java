@@ -9,6 +9,8 @@ import java.lang.*;
  */
 public class Enumeration extends Primitive {
 
+    public static final Type TYPE = Type.Enumeration;
+
     private final String stringValue;
     private final Long numericValue;
 

@@ -7,6 +7,8 @@ import java.time.ZonedDateTime;
  */
 public class DateTime extends Primitive {
 
+    public static final Type TYPE = Type.DateTime;
+
     private final ZonedDateTime value;
 
     public DateTime(final Tag tag, final ZonedDateTime value) {
