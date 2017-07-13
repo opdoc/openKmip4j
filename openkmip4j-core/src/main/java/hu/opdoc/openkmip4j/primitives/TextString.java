@@ -15,6 +15,15 @@ public class TextString extends Primitive {
 
     private final EncryptedByteArray encryptedValue;
 
+    public TextString(final Tag tag, final String value) {
+        super(tag, Type.TextString, 0l);
+
+        try (final GuardedByteArray guardedValue = new GuardedByteArray(value.getBytes(StandardCharsets.UTF_8))) {
+            this.length = Long.valueOf(guardedValue.getValue().length);
+            this.encryptedValue = new EncryptedByteArray(guardedValue);
+        }
+    }
+
     public TextString(final Tag tag, final GuardedCharArray value) {
         super(tag, Type.TextString, 0l);
 
