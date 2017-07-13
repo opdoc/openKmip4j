@@ -1,4 +1,4 @@
-package hu.opdoc.openkmip4j.v1.object.base;
+package hu.opdoc.openkmip4j.v1_0.object.base;
 
 import hu.opdoc.openkmip4j.KmipObject;
 import hu.opdoc.openkmip4j.message.KmipMessageFormatException;
