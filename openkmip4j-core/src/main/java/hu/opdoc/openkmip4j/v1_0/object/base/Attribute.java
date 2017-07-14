@@ -7,7 +7,7 @@ import hu.opdoc.openkmip4j.primitives.*;
 import java.lang.Integer;
 
 /**
- * Created by peter on 2017.07.13..
+ * Created by peter on 2017.07.13.
  */
 public abstract class Attribute<T extends Primitive> extends KmipObject {
 
@@ -87,14 +87,14 @@ public abstract class Attribute<T extends Primitive> extends KmipObject {
     @Override
     public Primitive toPrimitive() {
         valuePrimitive.setTag(StandardTag.AttributeValue);
-        final Structure.StructureBuilder builder = Structure.newInstance(tag)
-                .add(new TextString(StandardTag.AttributeName, name))
-                .add(valuePrimitive);
+        final Structure result = new Structure(tag);
+        result.getValue().add(new TextString(StandardTag.AttributeName, name));
+        result.getValue().add(valuePrimitive);
 
         if (index != null) {
-            builder.add(new hu.opdoc.openkmip4j.primitives.Integer(StandardTag.AttributeIndex, index));
+            result.getValue().add(new hu.opdoc.openkmip4j.primitives.Integer(StandardTag.AttributeIndex, index));
         }
 
-        return builder.build();
+        return result;
     }
 }

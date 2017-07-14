@@ -5,7 +5,7 @@ import hu.opdoc.openkmip4j.KmipRuntimeException;
 import hu.opdoc.openkmip4j.primitives.*;
 import hu.opdoc.openkmip4j.primitives.Boolean;
 import hu.opdoc.openkmip4j.primitives.Integer;
-import hu.opdoc.openkmip4j.utils.GuardedByteArray;
+import hu.opdoc.openkmip4j.utils.arrays.GuardedByteArray;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -101,18 +101,17 @@ abstract class TtlvReader {
                 }
 
                 case Structure: {
-                    final Structure.StructureBuilder builder = Structure.newInstance(tag);
+                    primitive = new Structure(tag);
                     long remainingBytes = header.getLength();
                     while (remainingBytes >= TtlvHeader.HEADER_LENGTH) {
                         final ReadResult readResult = readRecursive(input);
                         remainingBytes -= readResult.readBytes;
-                        builder.add(readResult.primitive);
+                        ((Structure)primitive).getValue().add(readResult.primitive);
                     }
                     if (remainingBytes > 0) {
                         final GuardedByteArray padding = readBytes(Long.valueOf(remainingBytes).intValue(), input);
                         padding.destroy();
                     }
-                    primitive = builder.build();
                     readBytes += header.getLength();
                     break;
                 }

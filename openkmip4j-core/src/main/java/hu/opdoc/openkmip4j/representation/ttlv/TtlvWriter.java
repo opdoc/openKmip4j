@@ -6,7 +6,7 @@ import hu.opdoc.openkmip4j.primitives.*;
 import hu.opdoc.openkmip4j.primitives.Boolean;
 import hu.opdoc.openkmip4j.primitives.Integer;
 import hu.opdoc.openkmip4j.representation.KmipTypeMismatchesPrimitiveClassException;
-import hu.opdoc.openkmip4j.utils.GuardedByteArray;
+import hu.opdoc.openkmip4j.utils.arrays.GuardedByteArray;
 
 import java.io.IOException;
 import java.io.OutputStream;
