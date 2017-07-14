@@ -1,4 +1,4 @@
-package hu.opdoc.openkmip4j.utils;
+package hu.opdoc.openkmip4j.utils.arrays;
 
 import java.io.Closeable;
 import java.nio.CharBuffer;

@@ -1,4 +1,4 @@
-package hu.opdoc.openkmip4j.utils;
+package hu.opdoc.openkmip4j.utils.arrays;
 
 import hu.opdoc.openkmip4j.KmipRuntimeException;
 
