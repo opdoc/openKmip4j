@@ -1,5 +1,6 @@
 package hu.opdoc.openkmip4j.primitives;
 
+import hu.opdoc.openkmip4j.KmipInvalidSettingException;
 import hu.opdoc.openkmip4j.message.KmipEnum;
 
 import java.lang.*;
@@ -11,8 +12,8 @@ public class Enumeration extends Primitive {
 
     public static final Type TYPE = Type.Enumeration;
 
-    private final String stringValue;
-    private final Long numericValue;
+    private String stringValue;
+    private Long numericValue;
 
     public Enumeration(final Tag tag, final String stringValue) {
         super(tag, Type.Enumeration);
@@ -30,12 +31,7 @@ public class Enumeration extends Primitive {
 
     public Enumeration(final Tag tag, final KmipEnum value) {
         super(tag, Type.Enumeration);
-        this.stringValue = value.name();
-        this.numericValue = value.getValue();
-        validate();
-        if (numericValue == null) {
-            throw new IllegalArgumentException(String.format("The value of a KmipEnum must not be null: %s::%s", value.getClass().getCanonicalName(), value.name()));
-        }
+        setValue(value);
     }
 
     public Long getNumericValue() {
@@ -50,9 +46,41 @@ public class Enumeration extends Primitive {
         }
     }
 
-    private void validate() {
-        if (stringValue == null && numericValue == null) {
-            throw new IllegalArgumentException(String.format("Either a numeric or a name value must be set for the %s Enumeration.", tag.toString()));
+    public void setValue(final KmipEnum value) {
+        this.stringValue = value.name();
+        this.numericValue = value.getValue();
+
+        if (numericValue == null) {
+            throw new KmipInvalidSettingException(
+                    String.format(
+                            "The numeric value of a KmipEnum must not be null: %s::%s",
+                            value.getClass().getCanonicalName(),
+                            value.name()
+                    )
+            );
         }
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return stringValue == null && numericValue == null;
+    }
+
+    @Override
+    protected void validate() {
+        super.validate();
+        if (isEmpty()) {
+            throw new KmipInvalidSettingException(
+                    String.format(
+                            "Either a numeric or a name value must be set for the %s Enumeration.",
+                            getTag()
+                    )
+            );
+        }
+    }
+
+    @Override
+    protected void calculateLength() {
+        setLength(type.getLength());
     }
 }

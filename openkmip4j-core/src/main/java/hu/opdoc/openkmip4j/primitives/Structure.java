@@ -13,25 +13,37 @@ public class Structure extends Primitive {
 
     private final List<Primitive> value;
 
+    public Structure() {
+        this(null);
+    }
+
+    public Structure(final Tag tag) {
+        this(tag, Collections.emptyList());
+    }
+
     public Structure(final Tag tag, final List<Primitive> value) {
-        super(
-                tag,
-                Type.Structure,
-                multipleOfEight(
-                        value.stream()
-                                .map(primitive -> primitive.getLength() + 8) // Add 8 byte TTLV header length to the payload length
-                                .reduce(0l, (x, y) -> x + y)         // Sum it all up
-                )
-        );
+        super(tag, Type.Structure);
+
         this.value = new ArrayList<>(value);  // Copy the structure so that it shouldn't change any more
+        calculateLength();
     }
 
     public List<Primitive> getValue() {
-        return Collections.unmodifiableList(value);
+        return value;
     }
 
-    public static StructureBuilder newInstance(final Tag tag) {
-        return new StructureBuilder(tag);
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    protected void calculateLength() {
+        setLength(multipleOfEight(
+                value.stream()
+                        .map(primitive -> primitive.getLength() + 8) // Add 8 byte TTLV header length to the payload length
+                        .reduce(0l, (x, y) -> x + y)        // Sum it all up
+        ));
     }
 
     private static long multipleOfEight(final long originalLength) {
@@ -40,24 +52,5 @@ public class Structure extends Primitive {
             result++;
         }
         return result;
-    }
-
-    public static class StructureBuilder {
-
-        private final Tag tag;
-        private final List<Primitive> contents = new ArrayList<>();
-
-        private StructureBuilder(Tag tag) {
-            this.tag = tag;
-        }
-
-        public StructureBuilder add(final Primitive item) {
-            contents.add(item);
-            return this;
-        }
-
-        public Structure build() {
-            return new Structure(tag, contents);
-        }
     }
 }
